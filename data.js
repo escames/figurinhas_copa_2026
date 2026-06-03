@@ -1,13 +1,4 @@
-// ═══════════════════════════════════════════════════════
-//  data.js — Figurinhas da Copa 2026
-//  Atualize este arquivo após cada troca e faça push
-//  para o GitHub. O index.html vai buscar os dados novos.
-// ═══════════════════════════════════════════════════════
-
-// Formato repetidas: { "SIGLA-NUMERO": quantidade_extra }
-// Ex: "MEX-7": 1  →  1 figurinha repetida da MEX nº 7
 const MEU_ALBUM = {
-
   repetidas: {
     "MEX-7": 1, "MEX-19": 1,
     "RSA-2": 2, "RSA-4": 3, "RSA-5": 1, "RSA-9": 1, "RSA-14": 1, "RSA-19": 1, "RSA-20": 2,
@@ -58,7 +49,6 @@ const MEU_ALBUM = {
     "GHA-14": 1, "GHA-19": 1
   },
 
-  // Formato faltantes: array de strings "SIGLA-NUMERO"
   faltantes: [
     "FWC-2","FWC-4","FWC-7","FWC-8","FWC-9","FWC-13","FWC-19",
     "CC-1","CC-2","CC-3","CC-4","CC-5","CC-6","CC-7","CC-8","CC-9","CC-10","CC-11","CC-12","CC-13","CC-14",
