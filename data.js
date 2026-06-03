@@ -1,103 +1,124 @@
-const MEU_ALBUM = {
-  repetidas: {
-    "MEX-7": 1, "MEX-19": 1,
-    "RSA-2": 2, "RSA-4": 3, "RSA-5": 1, "RSA-9": 1, "RSA-14": 1, "RSA-19": 1, "RSA-20": 2,
-    "KOR-4": 1, "KOR-5": 1, "KOR-7": 1, "KOR-8": 1, "KOR-10": 1, "KOR-12": 1, "KOR-20": 1,
-    "CZE-8": 1,
-    "CAN-6": 1, "CAN-17": 1, "CAN-18": 1,
-    "BIH-8": 1, "BIH-11": 1,
-    "QAT-7": 1, "QAT-12": 1, "QAT-14": 3, "QAT-15": 2, "QAT-16": 3, "QAT-20": 2,
-    "SUI-3": 1, "SUI-5": 1, "SUI-6": 1, "SUI-7": 2, "SUI-8": 1, "SUI-10": 2, "SUI-12": 1,
-    "BRA-3": 1, "BRA-5": 1, "BRA-6": 1, "BRA-7": 1, "BRA-12": 1, "BRA-15": 1,
-    "MAR-4": 1, "MAR-14": 1,
-    "HAI-4": 1, "HAI-10": 1, "HAI-15": 3, "HAI-19": 1, "HAI-20": 1,
-    "SCO-3": 1, "SCO-5": 1, "SCO-11": 1,
-    "USA-15": 1, "USA-16": 1,
-    "PAR-18": 1, "PAR-19": 1,
-    "AUS-3": 1, "AUS-4": 1, "AUS-8": 2, "AUS-10": 1, "AUS-11": 1, "AUS-12": 1, "AUS-15": 1, "AUS-16": 1, "AUS-17": 1,
-    "TUR-6": 1, "TUR-10": 1, "TUR-12": 3, "TUR-13": 2, "TUR-15": 1, "TUR-17": 2, "TUR-20": 1,
-    "GER-12": 1,
-    "CUW-1": 1, "CUW-4": 1, "CUW-18": 1,
-    "CIV-2": 1, "CIV-3": 1, "CIV-7": 1, "CIV-9": 1, "CIV-14": 1, "CIV-19": 1, "CIV-20": 1,
-    "ECU-3": 1, "ECU-13": 1, "ECU-16": 2,
-    "NED-8": 2, "NED-18": 2,
-    "JPN-2": 1, "JPN-4": 1, "JPN-6": 1, "JPN-10": 1, "JPN-15": 1, "JPN-19": 1,
-    "SWE-2": 1, "SWE-3": 2, "SWE-4": 4, "SWE-6": 2, "SWE-10": 2, "SWE-15": 1,
-    "TUN-1": 1, "TUN-6": 2, "TUN-10": 1, "TUN-12": 1, "TUN-13": 2,
-    "BEL-1": 1, "BEL-8": 1, "BEL-11": 1, "BEL-14": 2, "BEL-16": 1, "BEL-17": 1, "BEL-18": 1, "BEL-20": 2,
-    "EGY-4": 1, "EGY-9": 1, "EGY-11": 1, "EGY-15": 1, "EGY-16": 1, "EGY-17": 1,
-    "IRN-1": 1,
-    "NZL-4": 2,
-    "ESP-5": 1, "ESP-11": 2, "ESP-15": 3, "ESP-19": 1,
-    "CPV-7": 1, "CPV-17": 1,
-    "KSA-2": 1, "KSA-6": 1, "KSA-9": 1, "KSA-10": 1, "KSA-11": 1,
-    "URU-10": 1, "URU-13": 1, "URU-15": 1,
-    "FRA-3": 1, "FRA-7": 1, "FRA-8": 1, "FRA-9": 1, "FRA-10": 1, "FRA-16": 1, "FRA-20": 2,
-    "SEN-3": 1, "SEN-4": 1, "SEN-12": 1, "SEN-16": 1, "SEN-18": 1, "SEN-20": 1,
-    "IRQ-19": 3,
-    "NOR-5": 1, "NOR-8": 1, "NOR-11": 1, "NOR-15": 1, "NOR-19": 1,
-    "ARG-9": 1,
-    "ALG-9": 1, "ALG-13": 2, "ALG-14": 1, "ALG-18": 1, "ALG-19": 1,
-    "AUT-2": 2, "AUT-4": 1, "AUT-5": 1, "AUT-11": 1, "AUT-13": 1, "AUT-16": 1, "AUT-17": 1, "AUT-20": 1,
-    "JOR-4": 1, "JOR-8": 1,
-    "POR-20": 1,
-    "COD-6": 1, "COD-8": 1, "COD-9": 1,
-    "UZB-15": 1, "UZB-19": 1,
-    "COL-4": 1, "COL-11": 1, "COL-16": 1,
-    "ENG-5": 2, "ENG-9": 1, "ENG-11": 1,
-    "CRO-5": 1, "CRO-7": 2, "CRO-9": 1, "CRO-11": 1, "CRO-14": 1,
-    "GHA-14": 1, "GHA-19": 1
-  },
+// ─────────────────────────────────────────────────────────
+//  MINHAS FIGURINHAS — Copa 2026
+//
+//  COMO ATUALIZAR (sem planilha!):
+//  1) No app Moovtech, copie a mensagem das suas repetidas e
+//     cole dentro das crases de REPETIDAS_TEXT abaixo.
+//  2) Copie a mensagem das suas faltantes e cole em FALTANTES_TEXT.
+//  Pode colar a mensagem inteira — a saudação e o link de
+//  download são ignorados automaticamente pela página.
+//
+//  Dica: dá pra fazer tudo isso pela própria página, no painel
+//  "🔄 Atualizar minhas figurinhas", que gera este arquivo pronto.
+//
+//  Formato repetidas:  MEX: 7(1x), 19(1x)   (o "(Nx)" = quantas tenho)
+//  Formato faltantes:  MEX: 1, 5, 18
+// ─────────────────────────────────────────────────────────
 
-  faltantes: [
-    "FWC-2","FWC-4","FWC-7","FWC-8","FWC-9","FWC-13","FWC-19",
-    "CC-1","CC-2","CC-3","CC-4","CC-5","CC-6","CC-7","CC-8","CC-9","CC-10","CC-11","CC-12","CC-13","CC-14",
-    "MEX-1","MEX-5","MEX-18",
-    "RSA-8","RSA-10","RSA-12",
-    "KOR-1","KOR-9","KOR-11","KOR-13",
-    "CZE-3","CZE-5","CZE-6","CZE-9","CZE-10","CZE-11","CZE-13",
-    "CAN-4","CAN-19",
-    "BIH-9","BIH-13","BIH-15","BIH-16","BIH-18","BIH-20",
-    "QAT-3","QAT-5","QAT-6","QAT-8",
-    "SUI-4","SUI-9","SUI-16","SUI-20",
-    "BRA-1","BRA-4","BRA-10","BRA-14","BRA-18","BRA-19",
-    "MAR-1","MAR-5","MAR-13",
-    "HAI-14","HAI-17",
-    "SCO-9","SCO-12","SCO-17",
-    "USA-1","USA-3","USA-5","USA-9","USA-11","USA-14",
-    "PAR-6",
-    "AUS-7",
-    "TUR-2","TUR-4","TUR-6","TUR-13",
-    "GER-17",
-    "CUW-8","CUW-10","CUW-11","CUW-13","CUW-15","CUW-17","CUW-20",
-    "CIV-16",
-    "ECU-1","ECU-7","ECU-9","ECU-14","ECU-18",
-    "NED-2","NED-4","NED-7","NED-13",
-    "JPN-5","JPN-8","JPN-13",
-    "SWE-5","SWE-9","SWE-14","SWE-19","SWE-20",
-    "TUN-5","TUN-9","TUN-11","TUN-15","TUN-16","TUN-18","TUN-19",
-    "BEL-4","BEL-13","BEL-19",
-    "EGY-2","EGY-3","EGY-7","EGY-8","EGY-10","EGY-12","EGY-13",
-    "IRN-2","IRN-6","IRN-10","IRN-11",
-    "NZL-1","NZL-3","NZL-13","NZL-15",
-    "ESP-7","ESP-9",
-    "CPV-1","CPV-2","CPV-4","CPV-5","CPV-8","CPV-10","CPV-15","CPV-18",
-    "KSA-17",
-    "URU-11",
-    "FRA-5","FRA-15","FRA-17",
-    "SEN-5",
-    "IRQ-1","IRQ-4","IRQ-6","IRQ-7","IRQ-9","IRQ-10","IRQ-11","IRQ-15","IRQ-16","IRQ-20",
-    "NOR-13","NOR-17","NOR-20",
-    "ARG-1","ARG-3",
-    "ALG-8",
-    "AUT-1","AUT-3","AUT-10","AUT-12","AUT-15","AUT-18","AUT-19",
-    "JOR-3","JOR-6",
-    "POR-4","POR-6","POR-7","POR-13","POR-14","POR-16","POR-18",
-    "COD-1","COD-3","COD-7","COD-11","COD-16","COD-20",
-    "UZB-5","UZB-8","UZB-9","UZB-14","UZB-16","UZB-18","UZB-20",
-    "COL-13","COL-18","COL-19",
-    "ENG-13","ENG-14","ENG-17","ENG-18",
-    "CRO-8","CRO-20",
-    "GHA-5","GHA-6","GHA-10","GHA-17","GHA-18"
-  ]
-};
+const REPETIDAS_TEXT = `
+MEX: 7(1x), 19(1x)
+RSA: 2(2x), 4(3x), 5(1x), 9(1x), 14(1x), 19(1x), 20(2x)
+KOR: 4(1x), 5(1x), 7(1x), 8(1x), 10(1x), 12(1x), 20(1x)
+CZE: 8(1x)
+CAN: 6(1x), 17(1x), 18(1x)
+BIH: 8(1x), 11(1x)
+QAT: 7(1x), 12(1x), 14(3x), 15(2x), 16(3x), 20(2x)
+SUI: 3(1x), 5(1x), 6(1x), 7(2x), 8(1x), 10(2x), 12(1x)
+BRA: 3(1x), 5(1x), 6(1x), 7(1x), 12(1x), 15(1x)
+MAR: 4(1x), 14(1x)
+HAI: 4(1x), 10(1x), 15(3x), 19(1x), 20(1x)
+SCO: 3(1x), 5(1x), 11(1x)
+USA: 15(1x), 16(1x)
+PAR: 18(1x), 19(1x)
+AUS: 3(1x), 4(1x), 8(2x), 10(1x), 11(1x), 12(1x), 15(1x), 16(1x), 17(1x)
+TUR: 6(1x), 10(1x), 12(3x), 13(2x), 15(1x), 17(2x), 20(1x)
+GER: 12(1x)
+CUW: 1(1x), 4(1x), 18(1x)
+CIV: 2(1x), 3(1x), 7(1x), 9(1x), 14(1x), 19(1x), 20(1x)
+ECU: 3(1x), 13(1x), 16(2x)
+NED: 8(2x), 18(2x)
+JPN: 2(1x), 4(1x), 6(1x), 10(1x), 15(1x), 19(1x)
+SWE: 2(1x), 3(2x), 4(4x), 6(2x), 10(2x), 15(1x)
+TUN: 1(1x), 6(2x), 10(1x), 12(1x), 13(2x)
+BEL: 1(1x), 8(1x), 11(1x), 14(2x), 16(1x), 17(1x), 18(1x), 20(2x)
+EGY: 4(1x), 9(1x), 11(1x), 15(1x), 16(1x), 17(1x)
+IRN: 1(1x)
+NZL: 4(2x)
+ESP: 5(1x), 11(2x), 15(3x), 19(1x)
+CPV: 7(1x), 17(1x)
+KSA: 2(1x), 6(1x), 9(1x), 10(1x), 11(1x)
+URU: 10(1x), 13(1x), 15(1x)
+FRA: 3(1x), 7(1x), 8(1x), 9(1x), 10(1x), 16(1x), 20(2x)
+SEN: 3(1x), 4(1x), 12(1x), 16(1x), 18(1x), 20(1x)
+IRQ: 19(3x)
+NOR: 5(1x), 8(1x), 11(1x), 15(1x), 19(1x)
+ARG: 9(1x)
+ALG: 9(1x), 13(2x), 14(1x), 18(1x), 19(1x)
+AUT: 2(2x), 4(1x), 5(1x), 11(1x), 13(1x), 16(1x), 17(1x), 20(1x)
+JOR: 4(1x), 8(1x)
+POR: 20(1x)
+COD: 6(1x), 8(1x), 9(1x)
+UZB: 15(1x), 19(1x)
+COL: 4(1x), 11(1x), 16(1x)
+ENG: 5(2x), 9(1x), 11(1x)
+CRO: 5(1x), 7(2x), 9(1x), 11(1x), 14(1x)
+GHA: 14(1x), 19(1x)
+`;
+
+const FALTANTES_TEXT = `
+FWC: 2, 4, 7, 8, 9, 13, 19
+CC: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+MEX: 1, 5, 18
+RSA: 8, 10, 12
+KOR: 1, 9, 11, 13
+CZE: 3, 5, 6, 9, 10, 11, 13
+CAN: 4, 19
+BIH: 9, 13, 15, 16, 18, 20
+QAT: 3, 5, 6, 8
+SUI: 4, 9, 16, 20
+BRA: 1, 4, 10, 14, 18, 19
+MAR: 1, 5, 13
+HAI: 14, 17
+SCO: 9, 12, 17
+USA: 1, 3, 5, 9, 11, 14
+PAR: 6
+AUS: 7
+TUR: 2, 4, 6, 13
+GER: 17
+CUW: 8, 10, 11, 13, 15, 17, 20
+CIV: 16
+ECU: 1, 7, 9, 14, 18
+NED: 2, 4, 7, 13
+JPN: 5, 8, 13
+SWE: 5, 9, 14, 19, 20
+TUN: 5, 9, 11, 15, 16, 18, 19
+BEL: 4, 13, 19
+EGY: 2, 3, 7, 8, 10, 12, 13
+IRN: 2, 6, 10, 11
+NZL: 1, 3, 13, 15
+ESP: 7, 9
+CPV: 1, 2, 4, 5, 8, 10, 15, 18
+KSA: 17
+URU: 11
+FRA: 5, 15, 17
+SEN: 5
+IRQ: 1, 4, 6, 7, 9, 10, 11, 15, 16, 20
+NOR: 13, 17, 20
+ARG: 1, 3
+ALG: 8
+AUT: 1, 3, 10, 12, 15, 18, 19
+JOR: 3, 6
+POR: 4, 6, 7, 13, 14, 16, 18
+COD: 1, 3, 7, 11, 16, 20
+UZB: 5, 8, 9, 14, 16, 18, 20
+COL: 13, 18, 19
+ENG: 13, 14, 17, 18
+CRO: 8, 20
+GHA: 5, 6, 10, 17, 18
+`;
+
+// Total de figurinhas do álbum completo da Copa 2026 (usado na barra de progresso).
+const TOTAL_FIGURINHAS = 994;
+
+// Estrutura preenchida automaticamente pelo index.html a partir dos textos acima.
+const MEU_ALBUM = { repetidas: {}, faltantes: [] };
