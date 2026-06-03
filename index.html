@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Troca de Figurinhas — Copa 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="data.js"></script>
+<style>
+  :root {
+    --verde:    #00843D;
+    --amarelo:  #FFD100;
+    --azul:     #001E62;
+    --azul2:    #002D8A;
+    --branco:   #F8F9FA;
+    --card-bg:  rgba(255,255,255,0.055);
+    --border:   rgba(255,255,255,0.10);
+    --text-dim: rgba(255,255,255,0.45);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--azul);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── BACKGROUND ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 15% 0%,   rgba(0,132,61,0.18)  0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 90% 100%,  rgba(255,209,0,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 80% 40% at 50% 50%,   rgba(0,45,138,0.6)   0%, transparent 80%);
+    pointer-events: none;
+  }
+
+  /* Hexagon pattern overlay */
+  body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34z' fill='none' stroke='rgba(255,255,255,0.028)' stroke-width='1'/%3E%3Cpath d='M28 100L0 84V50l28-16 28 16v34z' fill='none' stroke='rgba(255,255,255,0.028)' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 56px 100px;
+    pointer-events: none;
+  }
+
+  .wrap { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* ─── HEADER ─── */
+  header {
+    padding: 52px 0 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .header-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,209,0,0.12);
+    border: 1px solid rgba(255,209,0,0.25);
+    border-radius: 999px;
+    padding: 5px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--amarelo);
+  }
+
+  .header-ball {
+    width: 10px; height: 10px;
+    background: var(--amarelo);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 10vw, 88px);
+    line-height: 0.95;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--amarelo);
+    -webkit-text-stroke: 0;
+    text-shadow: 0 0 40px rgba(255,209,0,0.4);
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: var(--text-dim);
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
+  /* ─── SECTION TITLE ─── */
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ─── CARD ─── */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 26px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .card + .card { margin-top: 14px; }
+
+  .card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+
+  /* ─── STATS ROW ─── */
+  .stats-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .stat {
+    flex: 1;
+    min-width: 110px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stat-n {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--amarelo);
+  }
+  .stat-l {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+
+  /* ─── TRADE GRID ─── */
+  .trade-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    align-items: stretch;
+    margin-bottom: 24px;
+  }
+
+  .trade-side {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 22px;
+    backdrop-filter: blur(8px);
+  }
+
+  .trade-side h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--amarelo);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .trade-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+  }
+  .trade-divider-icon {
+    width: 36px; height: 36px;
+    background: rgba(255,209,0,0.12);
+    border: 1px solid rgba(255,209,0,0.22);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+
+  /* ─── INPUTS ─── */
+  textarea {
+    width: 100%;
+    background: rgba(0,0,0,0.22);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: #fff;
+    resize: vertical;
+    min-height: 90px;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.5;
+  }
+  textarea::placeholder { color: rgba(255,255,255,0.22); }
+  textarea:focus { border-color: rgba(255,209,0,0.5); }
+  label.field-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 7px;
+    margin-top: 14px;
+  }
+  label.field-label:first-child { margin-top: 0; }
+  .hint { font-size: 11px; color: rgba(255,255,255,0.28); margin-top: 6px; }
+
+  /* ─── BUTTON ─── */
+  .btn-calc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: var(--verde);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 6px 24px rgba(0,132,61,0.35);
+    margin-bottom: 24px;
+    letter-spacing: 0.3px;
+  }
+  .btn-calc:hover { background: #009a48; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,132,61,0.45); }
+  .btn-calc:active { transform: translateY(0); }
+
+  /* ─── RESULT ─── */
+  #result { animation: fadeUp 0.35s ease; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+  .result-card {
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid;
+    margin-bottom: 14px;
+  }
+  .result-card.success {
+    background: rgba(0,132,61,0.12);
+    border-color: rgba(0,132,61,0.35);
+  }
+  .result-card.empty-r {
+    background: rgba(255,255,255,0.04);
+    border-color: var(--border);
+  }
+  .result-card.match {
+    background: rgba(255,209,0,0.08);
+    border-color: rgba(255,209,0,0.28);
+  }
+
+  .result-card h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .result-card.success h4 { color: #4cde8c; }
+  .result-card.empty-r h4 { color: var(--text-dim); }
+  .result-card.match h4 { color: var(--amarelo); }
+
+  /* ─── CHIPS ─── */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .chip {
+    border-radius: 8px;
+    padding: 4px 11px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  .chip-green {
+    background: rgba(0,200,90,0.15);
+    border: 1px solid rgba(0,200,90,0.3);
+    color: #5ef5a0;
+  }
+  .chip-yellow {
+    background: rgba(255,209,0,0.13);
+    border: 1px solid rgba(255,209,0,0.3);
+    color: var(--amarelo);
+  }
+  .chip-red {
+    background: rgba(255,80,80,0.13);
+    border: 1px solid rgba(255,80,80,0.28);
+    color: #ff9898;
+  }
+  .chip-blue {
+    background: rgba(100,160,255,0.13);
+    border: 1px solid rgba(100,160,255,0.28);
+    color: #a0c8ff;
+  }
+  .chip .qty {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border-radius: 4px;
+    font-size: 10px;
+    padding: 0 5px;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  .none-text { font-size: 13px; color: rgba(255,255,255,0.28); font-style: italic; }
+
+  /* ─── RESULT STATS ─── */
+  .result-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .r-stat {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 16px;
+    text-align: center;
+  }
+  .r-stat-n {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    line-height: 1;
+    color: var(--amarelo);
+  }
+  .r-stat-l { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 18px 0;
+  }
+
+  /* ─── MY STICKERS SUMMARY ─── */
+  .my-summary {
+    margin-bottom: 32px;
+  }
+
+  .sticker-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .group-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .group-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    min-width: 36px;
+  }
+
+  .empty-result {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .empty-result .big-icon { font-size: 40px; display:block; margin-bottom:12px; }
+  .empty-result p { color: var(--text-dim); font-size: 15px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 40px 0 20px;
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+  footer a { color: var(--amarelo); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 580px) {
+    .trade-grid { grid-template-columns: 1fr; }
+    .trade-divider { padding: 10px 0; }
+    .trade-divider-icon { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ═══════ HEADER ═══════ -->
+  <header>
+    <div class="header-eyebrow">
+      <span class="header-ball"></span>
+      Copa do Mundo 2026
+    </div>
+    <h1>Troca de<br><em>Figurinhas</em></h1>
+    <p class="header-sub">
+      Veja o que tenho de sobra, o que preciso,<br>
+      e descubra o que podemos trocar!
+    </p>
+  </header>
+
+  <!-- ═══════ STATS ═══════ -->
+  <div id="stats-row" class="stats-row"></div>
+
+  <!-- ═══════ MINHAS FIGURINHAS ═══════ -->
+  <div class="my-summary">
+    <div class="section-title">O que tenho de sobra</div>
+    <div class="card">
+      <div id="my-rep-display"></div>
+    </div>
+
+    <div class="section-title" style="margin-top:20px">O que estou precisando</div>
+    <div class="card">
+      <div id="my-need-display"></div>
+    </div>
+  </div>
+
+  <!-- ═══════ CALCULADORA DE TROCA ═══════ -->
+  <div class="section-title">Calcular troca</div>
+
+  <div class="trade-grid">
+    <!-- SEU AMIGO -->
+    <div class="trade-side">
+      <h3>🤝 Você</h3>
+
+      <label class="field-label">Suas repetidas</label>
+      <textarea id="amigo-rep" placeholder="Ex: BRA-5, ARG-9, ESP-11&#10;ou: BRA5, ARG9, ESP11"></textarea>
+
+      <label class="field-label">O que você precisa</label>
+      <textarea id="amigo-need" placeholder="Ex: BRA-1, MEX-7, FRA-3&#10;ou: BRA1, MEX7, FRA3"></textarea>
+      <div class="hint">Separe por vírgula, espaço ou enter</div>
+    </div>
+
+    <div class="trade-divider">
+      <div class="trade-divider-icon">⇌</div>
+    </div>
+
+    <!-- EU -->
+    <div class="trade-side">
+      <h3>⚽ Felipe</h3>
+      <div style="color:var(--text-dim); font-size:13px; line-height:1.7; padding-top:4px">
+        Minha lista de repetidas e faltantes já está carregada automaticamente — é só calcular!
+      </div>
+      <div style="margin-top:14px; display:flex; flex-wrap:wrap; gap:8px" id="my-preview"></div>
+    </div>
+  </div>
+
+  <button class="btn-calc" onclick="calcTrade()">
+    ⚡ Ver o que podemos trocar
+  </button>
+
+  <div id="result"></div>
+
+  <!-- ═══════ FOOTER ═══════ -->
+  <footer>
+    Copa do Mundo 2026 &nbsp;·&nbsp;
+    <a href="https://moovtech.app/stickers2026/" target="_blank">📱 Baixar app Moovtech</a>
+    &nbsp;·&nbsp; Figurinhas atualizadas no GitHub
+  </footer>
+
+</div><!-- /wrap -->
+
+<script>
+// ─────────────────────────────────────────────────────────
+//  HELPERS
+// ─────────────────────────────────────────────────────────
+
+// Parse input: aceita "BRA-5", "BRA5", "BRA 5", etc.
+function parseStickers(raw) {
+  if (!raw || !raw.trim()) return [];
+  return raw
+    .split(/[\s,;\n\r]+/)
+    .map(s => s.trim().toUpperCase())
+    .filter(s => s.length > 0)
+    .map(s => {
+      // normaliza para SIGLA-NUMERO
+      const m = s.match(/^([A-Z]+)[\s\-_]?(\d+)$/);
+      return m ? `${m[1]}-${m[2]}` : s;
+    });
+}
+
+// Agrupa por seleção: { BRA: [{code, num}, ...], ... }
+function groupByTeam(keys) {
+  const g = {};
+  for (const k of keys) {
+    const [team, num] = k.split('-');
+    if (!g[team]) g[team] = [];
+    g[team].push({ code: k, num: parseInt(num) || 0 });
+  }
+  // ordena números dentro de cada grupo
+  for (const t of Object.keys(g)) {
+    g[t].sort((a, b) => a.num - b.num);
+  }
+  return g;
+}
+
+function sortedTeams(groups) {
+  return Object.keys(groups).sort();
+}
+
+// ─────────────────────────────────────────────────────────
+//  RENDER STICKER LISTS
+// ─────────────────────────────────────────────────────────
+function renderRepetidas() {
+  const el = document.getElementById('my-rep-display');
+  const groups = groupByTeam(Object.keys(MEU_ALBUM.repetidas));
+  const teams = sortedTeams(groups);
+
+  if (!teams.length) { el.innerHTML = '<span class="none-text">Nenhuma repetida</span>'; return; }
+
+  el.innerHTML = teams.map(team => {
+    const chips = groups[team].map(({ code, num }) => {
+      const qty = MEU_ALBUM.repetidas[code];
+      return `<span class="chip chip-green">${team} ${num}<span class="qty">+${qty}</span></span>`;
+    }).join('');
+    return `<div class="group-row"><span class="group-tag">${team}</span>${chips}</div>`;
+  }).join('');
+}
+
+function renderFaltantes() {
+  const el = document.getElementById('my-need-display');
+  const groups = groupByTeam(MEU_ALBUM.faltantes);
+  const teams = sortedTeams(groups);
+
+  if (!teams.length) { el.innerHTML = '<span class="none-text">Nenhuma faltante 🎉</span>'; return; }
+
+  el.innerHTML = teams.map(team => {
+    const chips = groups[team].map(({ code, num }) =>
+      `<span class="chip chip-red">${team} ${num}</span>`
+    ).join('');
+    return `<div class="group-row"><span class="group-tag">${team}</span>${chips}</div>`;
+  }).join('');
+}
+
+function renderStats() {
+  const repKeys = Object.keys(MEU_ALBUM.repetidas);
+  const totalExtra = Object.values(MEU_ALBUM.repetidas).reduce((a, b) => a + b, 0);
+  const teams = new Set(repKeys.map(k => k.split('-')[0]));
+
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat">
+      <span class="stat-n">${repKeys.length}</span>
+      <span class="stat-l">Tipos com repetida</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n">${totalExtra}</span>
+      <span class="stat-l">Figurinhas sobrando</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n">${MEU_ALBUM.faltantes.length}</span>
+      <span class="stat-l">Faltando no álbum</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n">${teams.size}</span>
+      <span class="stat-l">Seleções com sobra</span>
+    </div>
+  `;
+}
+
+function renderMyPreview() {
+  const el = document.getElementById('my-preview');
+  const repCount = Object.keys(MEU_ALBUM.repetidas).length;
+  const needCount = MEU_ALBUM.faltantes.length;
+  el.innerHTML = `
+    <span class="chip chip-green">✅ ${repCount} tipos p/ dar</span>
+    <span class="chip chip-red">❌ ${needCount} faltando</span>
+  `;
+}
+
+// ─────────────────────────────────────────────────────────
+//  TRADE CALCULATOR
+// ─────────────────────────────────────────────────────────
+function calcTrade() {
+  const amigoRepRaw  = parseStickers(document.getElementById('amigo-rep').value);
+  const amigoNeedRaw = parseStickers(document.getElementById('amigo-need').value);
+
+  const amigoRepSet  = new Set(amigoRepRaw);
+  const amigoNeedSet = new Set(amigoNeedRaw);
+
+  const meuRepSet    = new Set(Object.keys(MEU_ALBUM.repetidas));
+  const meuNeedSet   = new Set(MEU_ALBUM.faltantes);
+
+  // O que EU posso DAR ao amigo: minhas repetidas ∩ o que amigo precisa
+  const euDou = amigoNeedRaw.filter(f => meuRepSet.has(f));
+
+  // O que o AMIGO pode me DAR: repetidas do amigo ∩ o que preciso
+  const amigoMeDa = amigoRepRaw.filter(f => meuNeedSet.has(f));
+
+  // Troca equilibrada
+  const matchCount = Math.min(euDou.length, amigoMeDa.length);
+
+  renderResult(euDou, amigoMeDa, matchCount);
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function chipsHtml(arr, cls) {
+  if (!arr || arr.length === 0) return '<span class="none-text">Nenhuma</span>';
+  return arr.map(f => {
+    const qty = MEU_ALBUM.repetidas[f];
+    const qtyBadge = qty ? `<span class="qty">+${qty}</span>` : '';
+    return `<span class="chip ${cls}">${f.replace('-', ' ')}${qtyBadge}</span>`;
+  }).join('');
+}
+
+function renderResult(euDou, amigoMeDa, matchCount) {
+  const el = document.getElementById('result');
+
+  if (euDou.length === 0 && amigoMeDa.length === 0) {
+    el.innerHTML = `
+      <div class="result-card empty-r">
+        <div class="empty-result">
+          <span class="big-icon">😕</span>
+          <p>Nenhuma troca possível com as figurinhas informadas.<br>
+          Verifique se digitou no formato correto (ex: <strong>BRA-5</strong>) e se as listas estão completas.</p>
+        </div>
+      </div>`;
+    return;
+  }
+
+  el.innerHTML = `
+    <div class="result-stats">
+      <div class="r-stat">
+        <div class="r-stat-n">${euDou.length}</div>
+        <div class="r-stat-l">Posso te dar</div>
+      </div>
+      <div class="r-stat">
+        <div class="r-stat-n">${amigoMeDa.length}</div>
+        <div class="r-stat-l">Você pode me dar</div>
+      </div>
+      <div class="r-stat">
+        <div class="r-stat-n">${matchCount}</div>
+        <div class="r-stat-l">Troca justa</div>
+      </div>
+    </div>
+
+    ${euDou.length > 0 ? `
+    <div class="result-card success">
+      <h4>✅ O QUE POSSO TE DAR (${euDou.length})</h4>
+      <div class="chips">${chipsHtml(euDou, 'chip-green')}</div>
+    </div>` : ''}
+
+    ${amigoMeDa.length > 0 ? `
+    <div class="result-card success" style="background:rgba(100,160,255,0.08);border-color:rgba(100,160,255,0.3)">
+      <h4 style="color:#a0c8ff">🎁 O QUE VOCÊ PODE ME DAR (${amigoMeDa.length})</h4>
+      <div class="chips">${chipsHtml(amigoMeDa, 'chip-blue')}</div>
+    </div>` : ''}
+
+    ${matchCount > 0 ? `
+    <div class="result-card match">
+      <h4>⭐ TROCA JUSTA — ${matchCount} × ${matchCount}</h4>
+      <div style="display:flex; gap:24px; flex-wrap:wrap; align-items:center">
+        <div>
+          <div class="card-label" style="margin-bottom:8px">Felipe dá</div>
+          <div class="chips">${chipsHtml(euDou.slice(0, matchCount), 'chip-yellow')}</div>
+        </div>
+        <div style="font-size:22px; color:var(--text-dim)">⇌</div>
+        <div>
+          <div class="card-label" style="margin-bottom:8px">Você dá</div>
+          <div class="chips">${chipsHtml(amigoMeDa.slice(0, matchCount), 'chip-yellow')}</div>
+        </div>
+      </div>
+    </div>` : ''}
+  `;
+}
+
+// ─────────────────────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  renderStats();
+  renderRepetidas();
+  renderFaltantes();
+  renderMyPreview();
+});
+</script>
+</body>
+</html>
