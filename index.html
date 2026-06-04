@@ -5,7 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Troca de Figurinhas — Copa 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="data.js"></script>
+<script>
+  // Carrega o data.js sempre na versão mais recente (driblando o cache de
+  // 10 min do GitHub Pages). Assim, ao atualizar a lista, você e seus amigos
+  // veem na hora — sem precisar limpar o cache do navegador.
+  (function () {
+    var s = document.createElement('script');
+    s.src = 'data.js?cb=' + Date.now();
+    s.onload = function () {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startApp);
+      } else {
+        startApp();
+      }
+    };
+    s.onerror = function () {
+      document.body && (document.body.innerHTML =
+        '<p style="color:#fff;font-family:sans-serif;padding:40px;text-align:center">' +
+        'Não consegui carregar a lista (data.js). Recarregue a página.</p>');
+    };
+    document.head.appendChild(s);
+  })();
+</script>
 <style>
   :root {
     --verde:    #00843D;
@@ -1152,7 +1173,8 @@ function restaurarPadrao() {
 // ─────────────────────────────────────────────────────────
 //  INIT
 // ─────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
+// Chamada pelo loader do data.js (no <head>), após o data.js carregar.
+function startApp() {
   const cur = getCurrentText();
   buildAlbum(cur.rep, cur.falt);
   renderAll();
@@ -1163,7 +1185,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // preenche os campos do painel com o texto atual
   document.getElementById('imp-rep').value  = cur.rep.trim();
   document.getElementById('imp-falt').value = cur.falt.trim();
-});
+}
 </script>
 </body>
 </html>
