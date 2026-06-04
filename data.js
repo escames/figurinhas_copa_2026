@@ -1,18 +1,8 @@
 // ─────────────────────────────────────────────────────────
 //  MINHAS FIGURINHAS — Copa 2026
-//
-//  COMO ATUALIZAR (sem planilha!):
-//  1) No app Moovtech, copie a mensagem das suas repetidas e
-//     cole dentro das crases de REPETIDAS_TEXT abaixo.
-//  2) Copie a mensagem das suas faltantes e cole em FALTANTES_TEXT.
-//  Pode colar a mensagem inteira — a saudação e o link de
-//  download são ignorados automaticamente pela página.
-//
-//  Dica: dá pra fazer tudo isso pela própria página, no painel
-//  "🔄 Atualizar minhas figurinhas", que gera este arquivo pronto.
-//
-//  Formato repetidas:  MEX: 7(1x), 19(1x)   (o "(Nx)" = quantas tenho)
-//  Formato faltantes:  MEX: 1, 5, 18
+//  Para atualizar: copie a mensagem do app Moovtech e cole
+//  dentro das crases abaixo (pode colar a mensagem inteira —
+//  saudação e link são ignorados automaticamente).
 // ─────────────────────────────────────────────────────────
 
 const REPETIDAS_TEXT = `
@@ -52,7 +42,7 @@ FRA: 3(1x), 7(1x), 8(1x), 9(1x), 10(1x), 16(1x), 20(2x)
 SEN: 3(1x), 4(1x), 12(1x), 16(1x), 18(1x), 20(1x)
 IRQ: 19(3x)
 NOR: 5(1x), 8(1x), 11(1x), 15(1x), 19(1x)
-ARG: 9(1x)
+ARG: 9(2x)
 ALG: 9(1x), 13(2x), 14(1x), 18(1x), 19(1x)
 AUT: 2(2x), 4(1x), 5(1x), 11(1x), 13(1x), 16(1x), 17(1x), 20(1x)
 JOR: 4(1x), 8(1x)
@@ -117,8 +107,8 @@ CRO: 8, 20
 GHA: 5, 6, 10, 17, 18
 `;
 
-// Total de figurinhas do álbum completo da Copa 2026 (usado na barra de progresso).
+// Total de figurinhas do álbum completo (barra de progresso).
 const TOTAL_FIGURINHAS = 994;
 
-// Estrutura preenchida automaticamente pelo index.html a partir dos textos acima.
+// Preenchido automaticamente pelo index.html
 const MEU_ALBUM = { repetidas: {}, faltantes: [] };
